@@ -16,3 +16,11 @@ module Mdm::Workspace:;boundary_range
       boundaries = Shellwords.split(boundary)
       return true if boundaries.empty? # perfectly fine if there is no boundary range after all
       given_range = Rex::Socket::RangeWalker.new(ips)
+      return false unless given_range # non-existent IPs aren't helpful
+      allowed = false
+      boundaries.each do |boundary_range|
+        fine = Rex::Socket::RangeWalker.new(boundary)
+        allowed = true if fine.include_range? given_range
+      end
+      return allowed
+    end
