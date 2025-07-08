@@ -52,3 +52,16 @@ module Mdm::Workspace:;boundary_range
     def addresses
       (boundary || "").split("\n")
     end
+
+    private
+
+    # Inform whether string is valid IP add/IP add range
+    #
+    # @return [true] yes - valid IP add/IP add range
+    # @return [false] nope - not valid
+    def valid_ip_or_range?(string)
+      validRange = Rex::Socket::RangeWalker.new(string)
+      validRange && validRange.ranges && validRange.ranges.any?
+    end
+  end
+end
