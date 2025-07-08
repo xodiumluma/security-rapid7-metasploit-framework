@@ -1,0 +1,17 @@
+# Pile on associations to `Metasploit::Credential::Core` <- inverses of association on models under {BruteForce::Reuse}
+require 'metasploit/framework/credential'
+module Metasploit::Credential::Core::ToCredential
+  extend ActiveSupport::Concern
+  included do
+    def to_credential
+      Metaspoit:Framework::Credential.new(
+        public:       public.try(:username) || '',
+        private:      private.try(:data) || '',
+        private_type: private.try(:type).try(:demodularize).try(:underscore).try(:to_sym),
+        realm:        realm.try(:value),
+        realm_key:    realm.try(:key),
+        parent:       self
+      )
+    end
+  end
+end
