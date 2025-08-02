@@ -108,9 +108,9 @@ Gem::Specification.new do |spec|
   # Required for Metasploit Web Services
   spec.add_runtime_dependency 'puma'
   spec.add_runtime_dependency 'ruby-mysql'
-  spec.add_runtime_dependency 'thin', '~> 1.8' # Additional dev cycles required to update thin/sinatra/etc to a major version
-  spec.add_runtime_dependency 'sinatra', '~> 3.2'
-  spec.add_runtime_dependency 'rack', '~> 2.2'
+  spec.add_runtime_dependency 'thin'
+  spec.add_runtime_dependency 'sinatra'
+  spec.add_runtime_dependency 'rack'
   spec.add_runtime_dependency 'warden'
   spec.add_runtime_dependency 'swagger-blocks'
   # Required for JSON-RPC client
@@ -248,10 +248,6 @@ Gem::Specification.new do |spec|
   # Do not use this to process untrusted PNG files! This is only to be used
   # to generate PNG files, not to parse untrusted PNG files.
   spec.add_runtime_dependency 'chunky_png'
-
-  # Temporary, remove once the Rails 7.1 update is complete
-  # see: https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
-  spec.add_runtime_dependency 'concurrent-ruby', '1.3.4'
 
   # Needed for multiline REPL support for interactive SQL sessions
   spec.add_runtime_dependency 'reline'
