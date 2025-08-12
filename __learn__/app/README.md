@@ -1,0 +1,1 @@
+Here we find ActiveRecord concerns, models & validators
