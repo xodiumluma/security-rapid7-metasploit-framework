@@ -18,3 +18,21 @@ Bundler.require(
 # For compatibility with jquery-rails (and other engines that require action_view) in pro
 require 'action_controller/railtie'
 require 'action_view/railtie'
+# Project
+require 'metasploit/framework/common_engine'
+require 'metasploit/framework/database'
+module Metasploit
+  module Framework
+    class Application < Rails::Application
+      include Metasploit::Framework::CommonEngine
+      config.paths['log']             = "#{Msf::Config.log_directory}/#{Rails.env}.log"
+      config.paths['config/database'] = [Metasploit::Framework::Database.configurations_pathname.try(:to_path)]
+      config.autoloader               = :zeitwerk
+      config.load_defaults 7.2
+      config.eager_load               = false
+    end
+  end
+end
+# Silence warnings about this defaulting to true
+I18n.enforce_available_locales = true
+require 'msfenv'
