@@ -7,3 +7,14 @@ all_environments = [
   :production,
   :test
 ]
+Bundler.require(
+  *Rails.groups(
+    coverage: [:test],
+    db: all_environments,
+    pcap: all_environments
+  )
+)
+# Railties
+# For compatibility with jquery-rails (and other engines that require action_view) in pro
+require 'action_controller/railtie'
+require 'action_view/railtie'
