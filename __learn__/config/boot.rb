@@ -24,4 +24,14 @@ rescue LoadError => e
   $stderr.puts = "  '#{e}'"
   $stderr.puts "[*] Either reinstall or upgrade bundler"
   exit(1)
-end 
+end
+
+lib_path = root.join('lib').to_path 
+unless $LOAD_PATH.include? lib_path
+  $LOAD_PATH.unshift lib_path
+end
+
+require 'digest'
+require 'metasploit/framework/version'
+require 'msf/base/config'
+
