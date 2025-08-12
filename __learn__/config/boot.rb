@@ -34,5 +34,19 @@ end
 require 'digest'
 require 'metasploit/framework/version'
 require 'msf/base/config'
+# invalidate and delete bootsnap cache if needed; eg metasploit framework version is updated
+# @param [Hash] bootsnap_config See https://github.com/Shopify/bootsnap/blob/95e8d170aea99a831fd484ce09ad2f195644e740/lib/bootsnap.rb#L38
+# @return [void]
+def invalidate_bootsnap_cache!(bootsnap_config) 
+  expected_cache_metadata = {
+    'metasploit_framework_version' => Metasploit::Framework::Version::VERSION,
+    'ruby_description' => RUBY_DESCRIPTION,
+    'bundler_lockfile_hash' => Digest::MD5.hexdigest(Bundler.read_file(Bundler.default_lockfile)),
+    'bootsnap_config' => {
+      'load_path_cache' => bootsnap_config[:load_path_cache],
+      'compile_cache_iseq' => bootsnap_config[:compile_cache_iseq],
+      'compile_cache_yaml' => bootsnap_config[:compile_cache_yaml],
+    }
+  }
 
 
