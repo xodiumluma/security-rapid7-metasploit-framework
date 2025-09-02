@@ -16,3 +16,14 @@ unless ENV['BUNDLE_GEMFILE']
     end
   end
 end
+
+begin
+  require 'bundler/setup'
+rescue LoadError => e
+  $stderr.puts "[*] Couldn't load bundler; thus this error:"
+  $stderr.puts
+  $stderr.puts "  '#{e}'"
+  $stderr.puts
+  $stderr.puts "[*] Might need to remove/upgrade bundler"
+  exit(1)
+end
