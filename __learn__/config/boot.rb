@@ -27,3 +27,17 @@ rescue LoadError => e
   $stderr.puts "[*] Might need to remove/upgrade bundler"
   exit(1)
 end
+lib_path = root.join('lib').to_path
+unless $LOAD_PATH.include? lib_path
+  $LOAD_PATH.unshift lib_path
+end
+require 'digest'  
+require 'metasploit/framework/version'
+require 'msf/base/config'
+# If necessary, invalidate and delete the bootsnap cache.
+# Illustration: the metasploit framework version is updated.
+#
+# @param [Hash] bootsnap_config Check out https://github.com/Shopify/bootsnap/blob/95e8d170aea99a831fd484ce09ad2f195644e740/lib/bootsnap.rb#L38
+# @return [void]
+def invalidate_bootstrap_cache!(bootsnap_config)
+  expected_cache_metadata
