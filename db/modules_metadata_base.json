@@ -24461,7 +24461,7 @@
     "autofilter_ports": [],
     "autofilter_services": [],
     "targets": null,
-    "mod_time": "2025-10-02 18:14:00 +0000",
+    "mod_time": "2025-10-23 14:41:18 +0000",
     "path": "/modules/auxiliary/gather/ldap_esc_vulnerable_cert_finder.rb",
     "is_install_path": true,
     "ref_name": "gather/ldap_esc_vulnerable_cert_finder",
@@ -41491,6 +41491,57 @@
     "post_auth": true,
     "default_credential": false,
     "notes": {},
+    "session_types": false,
+    "needs_cleanup": false,
+    "actions": []
+  },
+  "auxiliary_scanner/http/redoc_exposed": {
+    "name": "ReDoc API Docs UI Exposed",
+    "fullname": "auxiliary/scanner/http/redoc_exposed",
+    "aliases": [],
+    "rank": 300,
+    "disclosure_date": null,
+    "type": "auxiliary",
+    "author": [
+      "Hamza Sahin ( <Hamza Sahin (@hamzasahin61)>"
+    ],
+    "description": "Detects publicly exposed ReDoc API documentation pages.\n          The module performs safe, read-only GET requests and reports likely\n          ReDoc instances based on HTML markers.",
+    "references": [],
+    "platform": "",
+    "arch": "",
+    "rport": 80,
+    "autofilter_ports": [
+      80,
+      8080,
+      443,
+      8000,
+      8888,
+      8880,
+      8008,
+      3000,
+      8443
+    ],
+    "autofilter_services": [
+      "http",
+      "https"
+    ],
+    "targets": null,
+    "mod_time": "2025-10-08 03:43:31 +0000",
+    "path": "/modules/auxiliary/scanner/http/redoc_exposed.rb",
+    "is_install_path": true,
+    "ref_name": "scanner/http/redoc_exposed",
+    "check": false,
+    "post_auth": false,
+    "default_credential": false,
+    "notes": {
+      "Stability": [
+        "crash-safe"
+      ],
+      "Reliability": [],
+      "SideEffects": [
+        "ioc-in-logs"
+      ]
+    },
     "session_types": false,
     "needs_cleanup": false,
     "actions": []
@@ -96473,6 +96524,58 @@
     "needs_cleanup": true,
     "actions": []
   },
+  "exploit_linux/persistence/init_sysvinit": {
+    "name": "Service System V Persistence",
+    "fullname": "exploit/linux/persistence/init_sysvinit",
+    "aliases": [
+      "exploits/linux/local/service_persistence"
+    ],
+    "rank": 600,
+    "disclosure_date": "1983-01-01",
+    "type": "exploit",
+    "author": [
+      "h00die"
+    ],
+    "description": "This module will create a service via System V on the box, and mark it for auto-restart.\n          We need enough access to write service files and potentially restart services.\n\n          Some systems include backwards compatibility, such as Ubuntu up to about 16.04.\n\n          Targets:\n          CentOS <= 5\n          Debian <= 6\n          Kali 2.0\n          Ubuntu <= 6.06\n          Note: System V won't restart the service if it dies, only an init change (reboot etc) will restart it.\n\n          Verified on Kali 2.0, Ubuntu 10.04",
+    "references": [
+      "URL-https://www.digitalocean.com/community/tutorials/how-to-configure-a-linux-service-to-start-automatically-after-a-crash-or-reboot-part-1-practical-examples",
+      "ATT&CK-T1543"
+    ],
+    "platform": "Linux,Unix",
+    "arch": "cmd, x86, x64, armle, aarch64, ppc, mipsle, mipsbe",
+    "rport": null,
+    "autofilter_ports": [],
+    "autofilter_services": [],
+    "targets": [
+      "System V"
+    ],
+    "mod_time": "2025-10-14 19:30:06 +0000",
+    "path": "/modules/exploits/linux/persistence/init_sysvinit.rb",
+    "is_install_path": true,
+    "ref_name": "linux/persistence/init_sysvinit",
+    "check": true,
+    "post_auth": false,
+    "default_credential": false,
+    "notes": {
+      "Stability": [
+        "crash-safe"
+      ],
+      "Reliability": [
+        "repeatable-session",
+        "event-dependent"
+      ],
+      "SideEffects": [
+        "artifacts-on-disk",
+        "config-changes"
+      ]
+    },
+    "session_types": [
+      "shell",
+      "meterpreter"
+    ],
+    "needs_cleanup": true,
+    "actions": []
+  },
   "exploit_linux/persistence/motd": {
     "name": "update-motd.d Persistence",
     "fullname": "exploit/linux/persistence/motd",
@@ -120064,6 +120167,65 @@
     "session_types": false,
     "needs_cleanup": true
   },
+  "exploit_multi/http/vvveb_auth_rce_cve_2025_8518": {
+    "name": "Remote Code Execution Vulnerability in Vvveb",
+    "fullname": "exploit/multi/http/vvveb_auth_rce_cve_2025_8518",
+    "aliases": [],
+    "rank": 600,
+    "disclosure_date": "2025-01-10",
+    "type": "exploit",
+    "author": [
+      "Maksim Rogov",
+      "Hamed Kohi"
+    ],
+    "description": "Vvveb CMS is vulnerable to code injection via the Code Editor functionality.\n\n          Unsanitized editing functionality allows attacker-controlled changes to existing files on the web-accessible filesystem,\n          allowing remote authenticated attackers with access to the Code Editor to achieve code execution\n          when those modified files are executed or served by the application or web server.\n\n          This vulnerability affects Vvveb CMS versions up to and including 1.0.5.\n          Successful exploitation may result in the remote code execution under the privileges\n          of the web server, potentially exposing sensitive data or disrupting survey operations.\n\n          An attacker can execute arbitrary system commands in the context of the user running the web server.",
+    "references": [
+      "CVE-2025-8518",
+      "URL-https://hkohi.ca/vulnerability/8"
+    ],
+    "platform": "PHP",
+    "arch": "php",
+    "rport": 80,
+    "autofilter_ports": [
+      80,
+      8080,
+      443,
+      8000,
+      8888,
+      8880,
+      8008,
+      3000,
+      8443
+    ],
+    "autofilter_services": [
+      "http",
+      "https"
+    ],
+    "targets": [
+      "PHP"
+    ],
+    "mod_time": "2025-10-21 19:10:16 +0000",
+    "path": "/modules/exploits/multi/http/vvveb_auth_rce_cve_2025_8518.rb",
+    "is_install_path": true,
+    "ref_name": "multi/http/vvveb_auth_rce_cve_2025_8518",
+    "check": true,
+    "post_auth": true,
+    "default_credential": false,
+    "notes": {
+      "Stability": [
+        "crash-safe"
+      ],
+      "SideEffects": [
+        "ioc-in-logs",
+        "artifacts-on-disk"
+      ],
+      "Reliability": [
+        "repeatable-session"
+      ]
+    },
+    "session_types": false,
+    "needs_cleanup": null
+  },
   "exploit_multi/http/weblogic_admin_handle_rce": {
     "name": "Oracle WebLogic Server Administration Console Handle RCE",
     "fullname": "exploit/multi/http/weblogic_admin_handle_rce",
@@ -131288,7 +131450,7 @@
     "needs_cleanup": null
   },
   "exploit_unix/http/freepbx_unauth_sqli_to_rce": {
-    "name": "FreePBX ajax.php unuthenticated SQLi to RCE",
+    "name": "FreePBX ajax.php unauthenticated SQLi to RCE",
     "fullname": "exploit/unix/http/freepbx_unauth_sqli_to_rce",
     "aliases": [],
     "rank": 600,
@@ -131325,7 +131487,7 @@
     "targets": [
       "Unix Command"
     ],
-    "mod_time": "2025-09-22 17:34:00 +0000",
+    "mod_time": "2025-10-20 14:29:19 +0000",
     "path": "/modules/exploits/unix/http/freepbx_unauth_sqli_to_rce.rb",
     "is_install_path": true,
     "ref_name": "unix/http/freepbx_unauth_sqli_to_rce",
@@ -188437,7 +188599,7 @@
       "msutovsky-r7 <martin_sutovsky@rapid7.com>",
       "James Williams"
     ],
-    "description": "This module exploits a bug in LIQPad up to version 5.48.00. The bug is only exploitable in paid version of software. The core of a bug is cache file containing deserialized data, which attacker can overwrite with malicious payload. The data gets deserialized every time the app restarts.",
+    "description": "This module exploits a bug in LINQPad up to version 5.52.00. The bug is only exploitable in paid version of software. The core of a bug is cache file containing deserialized data, which attacker can overwrite with malicious payload. The data gets deserialized every time the app restarts.",
     "references": [
       "URL-https://trustedsec.com/blog/discovering-a-deserialization-vulnerability-in-linqpad",
       "CVE-2024-53326"
@@ -188450,7 +188612,7 @@
     "targets": [
       "Windows"
     ],
-    "mod_time": "2025-05-06 08:43:57 +0000",
+    "mod_time": "2025-10-19 10:05:48 +0000",
     "path": "/modules/exploits/windows/local/linqpad_deserialization_persistence.rb",
     "is_install_path": true,
     "ref_name": "windows/local/linqpad_deserialization_persistence",
@@ -273143,7 +273305,7 @@
     "autofilter_ports": null,
     "autofilter_services": null,
     "targets": null,
-    "mod_time": "2025-05-21 10:45:08 +0000",
+    "mod_time": "2025-09-25 16:38:50 +0000",
     "path": "/modules/post/multi/recon/local_exploit_suggester.rb",
     "is_install_path": true,
     "ref_name": "multi/recon/local_exploit_suggester",
@@ -273202,6 +273364,43 @@
     },
     "session_types": [
       "meterpreter"
+    ],
+    "needs_cleanup": null,
+    "actions": []
+  },
+  "post_multi/recon/persistence_suggester": {
+    "name": "Persistence Exploit Suggester",
+    "fullname": "post/multi/recon/persistence_suggester",
+    "aliases": [],
+    "rank": 300,
+    "disclosure_date": null,
+    "type": "post",
+    "author": [
+      "h00die"
+    ],
+    "description": "This module suggests persistence modules that can be used.\n          The modules are suggested based on the architecture and platform\n          that the user has a shell opened as well as the available exploits\n          in meterpreter.\n          It's important to note that not all modules will be checked.\n          Exploits are chosen based on these conditions: session type,\n          platform, architecture, and required default options.",
+    "references": [],
+    "platform": "AIX,Android,Apple_iOS,Arista,BSD,BSDi,Brocade,Cisco,Firefox,FreeBSD,HPUX,Hardware,Irix,Java,JavaScript,Juniper,Linux,Mainframe,Mikrotik,Multi,NetBSD,Netware,NodeJS,OSX,OpenBSD,PHP,Python,R,Ruby,Solaris,Unifi,Unix,Unknown,Windows",
+    "arch": "",
+    "rport": null,
+    "autofilter_ports": null,
+    "autofilter_services": null,
+    "targets": null,
+    "mod_time": "2025-09-25 16:38:50 +0000",
+    "path": "/modules/post/multi/recon/persistence_suggester.rb",
+    "is_install_path": true,
+    "ref_name": "multi/recon/persistence_suggester",
+    "check": false,
+    "post_auth": false,
+    "default_credential": false,
+    "notes": {
+      "Stability": [],
+      "Reliability": [],
+      "SideEffects": []
+    },
+    "session_types": [
+      "meterpreter",
+      "shell"
     ],
     "needs_cleanup": null,
     "actions": []
