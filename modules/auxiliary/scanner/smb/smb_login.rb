@@ -43,6 +43,7 @@ class MetasploitModule < Msf::Auxiliary
       ],
       'References' => [
         [ 'CVE', '1999-0506'], # Weak password
+        [ 'ATT&CK', Mitre::Attack::Technique::T1021_002_SMB_WINDOWS_ADMIN_SHARES ],
       ],
       'License' => MSF_LICENSE,
       'DefaultOptions' => {
@@ -135,7 +136,8 @@ class MetasploitModule < Msf::Auxiliary
           framework: framework,
           framework_module: self,
           cache_file: datastore['Smb::Krb5Ccname'].blank? ? nil : datastore['Smb::Krb5Ccname'],
-          ticket_storage: ticket_storage
+          ticket_storage: ticket_storage,
+          clock_skew: kerberos_clock_skew_seconds
         )
       end
     end

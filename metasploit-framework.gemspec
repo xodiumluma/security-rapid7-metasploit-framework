@@ -74,9 +74,9 @@ Gem::Specification.new do |spec|
   # are needed when there's no database
   spec.add_runtime_dependency 'metasploit-model'
   # Needed for Meterpreter
-  spec.add_runtime_dependency 'metasploit-payloads', '2.0.235'
+  spec.add_runtime_dependency 'metasploit-payloads', '2.0.240'
   # Needed for the next-generation POSIX Meterpreter
-  spec.add_runtime_dependency 'metasploit_payloads-mettle', '1.0.45'
+  spec.add_runtime_dependency 'metasploit_payloads-mettle', '1.0.46'
   # Needed by msfgui and other rpc components
   # Locked until build env can handle newer version. See: https://github.com/msgpack/msgpack-ruby/issues/334
   spec.add_runtime_dependency 'msgpack', '~> 1.6.0'
@@ -153,11 +153,13 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'bcrypt_pbkdf'
   spec.add_runtime_dependency 'ruby_smb', '~> 3.3.15'
   spec.add_runtime_dependency 'net-imap' # Used in Postgres auth for its SASL stringprep implementation
+  spec.add_runtime_dependency 'date', '3.4.1' # Temporarily pinned until 3.5 can be tested
   spec.add_runtime_dependency 'net-ldap'
   spec.add_runtime_dependency 'net-smtp'
   spec.add_runtime_dependency 'net-sftp'
+  spec.add_runtime_dependency 'rest-client'
   spec.add_runtime_dependency 'winrm'
-  # Pinned to avoid WinRM warnings: https://github.com/WinRb/WinRM/issues/355 - if bumping verify windows/winrm/winrm_script_exec works against metasploitable with vagrant/vagrant creds 
+  # Pinned to avoid WinRM warnings: https://github.com/WinRb/WinRM/issues/355 - if bumping verify windows/winrm/winrm_script_exec works against metasploitable with vagrant/vagrant creds
   spec.add_runtime_dependency 'rexml', '3.4.1'
   spec.add_runtime_dependency 'ffi', '< 1.17.0'
 
