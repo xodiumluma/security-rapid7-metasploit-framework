@@ -65,7 +65,9 @@ class MsfAutoload
       "#{__dir__}/rex/post.rb",
       "#{__dir__}/rex/proto/ssh/hrr_rb_ssh.rb",
       "#{__dir__}/rex/proto/ssh/connection.rb",
-      "#{__dir__}/rex/proto/kerberos/pac/krb5_pac.rb"
+      "#{__dir__}/rex/proto/kerberos/pac/krb5_pac.rb",
+      "#{__dir__}/msf/core/mcp.rb",
+      "#{__dir__}/msf/core/mcp/"
     ]
   end
 
@@ -171,7 +173,6 @@ class MsfAutoload
       'reflective_dll_injection' => 'ReflectiveDLLInjection',
       'reflective_pe_loader' => 'ReflectivePELoader',
       'pe_inject' => 'PEInject',
-      'payload_db_conf' => 'PayloadDBConf',
       'reverse_tcp_x86' => 'ReverseTcp_x86',
       'reverse_tcp_aarch64' => 'ReverseTcp_Aarch64',
       'ruby_dl' => 'RubyDL',
@@ -345,11 +346,16 @@ class MsfAutoload
 end
 
 # global autoload of common gems
+autoload :BCrypt, 'bcrypt'
+autoload :Dnsruby, 'dnsruby'
 autoload :Faker, 'faker'
 autoload :BinData, 'bindata'
+autoload :Metasm, 'metasm'
+autoload :Recog, 'recog'
 autoload :RubySMB, 'ruby_smb'
 autoload :MetasploitPayloads, 'metasploit-payloads'
 autoload :PacketFu, 'packetfu'
+autoload :Zip, 'zip'
 autoload :DidYouMean, 'did_you_mean'
 
 require 'rexml/document'
