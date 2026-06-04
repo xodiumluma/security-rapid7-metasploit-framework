@@ -36,6 +36,8 @@ module MetasploitModule
   end
 
   def generate(_opts = {})
+    title = Metasm::Shellcode.define_cstring(datastore['TITLE'] || '')
+    text = Metasm::Shellcode.define_cstring(datastore['TEXT'] || '')
     style = 0x00
     case datastore['ICON'].upcase.strip
       # default = NO
@@ -88,11 +90,11 @@ module MetasploitModule
       call rbp
       mov r9, #{style}
       call get_text
-      db "#{datastore['TEXT']}", 0x00
+      #{text}
     get_text:
       pop rdx
       call get_title
-      db "#{datastore['TITLE']}", 0x00
+      #{title}
     get_title:
       pop r8
       xor rcx,rcx
