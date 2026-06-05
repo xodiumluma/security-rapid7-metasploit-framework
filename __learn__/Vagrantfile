@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+display_name = "metasploit-framework"
+Vagrant.configure(2) do |config|
+  config.ssh.forward_x11 = true
+  config.vm.box = "hashicorp/bionic64" # See https://app.vagrantup.com/hashicopr/boxes/bionic64
+  config.vm.network :fowarded_port, guest: 4444, host: 4444
+  config.vm.provider "vmware_desktop" do |v|
+    v.memory = 2048
+    v.cpus = 2
+    v.vmx['displayname'] = display_name
+    #v.gui = true # remove comment to show VM in hypervisor GUI
+  end
